@@ -32,6 +32,27 @@ const initialState={
   }
 };
 
+const reducer=(state=initialState,action)=>{
+  let initalSal,increm,newSal,obj;
+  if(action.id){
+    initialSal=state[action.id].salary;
+    increm=initialSal/5;
+  }
+  switch(action.type){
+    case 'GOODP':newSal=initialSal+increm;
+    obj=state[action.id];
+    obj.salary=newSal;
+    return Object.assign({},state);
+    case 'BADP':newSal=initialSal-increm;
+    obj=state[action.id];
+    obj.salary=newSal;
+    return Object.assign({},state);
+    default: return state;
+  }
+}
+
+const store=createStore(reducer);
+
 export default function App() {
   return (
     <View style={styles.container}>

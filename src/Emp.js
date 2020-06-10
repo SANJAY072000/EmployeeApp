@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, 
+  FlatList, TouchableOpacity } from 'react-native';
+import {connect} from 'react-redux';
 
 
-export default class Emp extends Component{
+class Emp extends Component{
     render(){
     return (
     <View style={styles.container}>
@@ -11,6 +13,25 @@ export default class Emp extends Component{
           );
     }
 }
+
+function mapStateToProps(state){
+return {
+  data:state
+};
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    goodp:id=>dispatch({
+      type:'GOODP',id
+    }),
+    badp:id=>dispatch({
+      type:'BADP',id
+    })
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Emp);
 
 const styles = StyleSheet.create({
   container: {
